@@ -17,6 +17,7 @@ internal unsafe class DACLibrary
 	public readonly IXCLRDataProcess ClrDataProcess;
 	public readonly nuint DacModule;
 	private ISOSDacInterface? _SOSDac;
+	private readonly nint iUnk;
 	public DACLibrary(DataTarget target, string dacPath, ulong runtimeBase)
 	{
 		DacModule = NativeMethods.LoadLibraryW(dacPath);
@@ -29,12 +30,12 @@ internal unsafe class DACLibrary
 		if (addr == 0)
 			throw new QHackCLRException("Failed to obtain Dac CLRDataCreateInstance");
 		DataTarget = new DacDataTargetImpl(target);
-		var f = (delegate* unmanaged[Stdcall]<ref Guid, nuint, out nuint, HRESULT>)addr;
+		var f = (delegate* unmanaged[Stdcall]<ref Guid, nuint, out nint, HRESULT>)addr;
 		var guid = Guid.Parse("5c552ab6-fc09-4cb3-8e36-22fa03c798b7");
-		var res = f(ref guid, (nuint)DataTarget.IDacDataTarget, out nuint iUnk);
+		var res = f(ref guid, (nuint)DataTarget.IDacDataTarget, out iUnk);
 		if (res != HRESULT.S_OK)
 			throw new QHackCLRException($"Failure loading DAC: CreateDacInstance failed 0x{res.Value:X8}");
-		ClrDataProcess = (IXCLRDataProcess)Marshal.GetObjectForIUnknown((nint)iUnk);
+		ClrDataProcess = (IXCLRDataProcess)Marshal.GetObjectForIUnknown(iUnk);
 	}
 
 	public ISOSDacInterface SOSDac

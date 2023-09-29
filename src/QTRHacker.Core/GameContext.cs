@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using QHackLib;
 using QHackLib.Assemble;
@@ -257,7 +258,14 @@ public class GameContext : IDisposable
 
 	public static GameContext OpenGame(Process process)
 	{
-		return new GameContext(process);
+		TaskCompletionSource<GameContext> taskCompletionSource = new();
+		Thread th = new((source) =>
+		{
+			(source as TaskCompletionSource<GameContext>).SetResult(new GameContext(process));
+		});
+		th.SetApartmentState(ApartmentState.MTA); // MTA to allow cross thread calling
+		th.Start(taskCompletionSource);
+		return taskCompletionSource.Task.Result;
 	}
 
 	public void Dispose()

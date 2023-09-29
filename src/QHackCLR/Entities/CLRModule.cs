@@ -23,7 +23,7 @@ public unsafe class CLRModule : CLREntity
 	internal readonly DacpModuleData Data;
 
 	public IReadOnlyList<CLRType?> DefinedTypes => m_DefinedTypes ??= Traverse(ModuleMapType.TYPEDEFTOMETHODTABLE);
-	public IReadOnlyList<CLRType?> ReferencedTypes => m_ReferencedTypes ??= Traverse(ModuleMapType.TYPEDEFTOMETHODTABLE);
+	public IReadOnlyList<CLRType?> ReferencedTypes => m_ReferencedTypes ??= Traverse(ModuleMapType.TYPEREFTOMETHODTABLE);
 
 	internal CLRModule(IModuleHelper helper, nuint ClrHandle) : base(ClrHandle)
 	{

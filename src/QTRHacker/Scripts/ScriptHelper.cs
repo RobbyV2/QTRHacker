@@ -1,4 +1,5 @@
 ﻿using QHackCLR.Common;
+using QHackCLR.Entities;
 using QHackLib.Assemble;
 using QHackLib.Memory;
 using QTRHacker.Core;
@@ -13,7 +14,7 @@ public static class ScriptHelper
 	{
 		return context.GameModuleHelper.GetFunctionAddress(type, func);
 	}
-	public static unsafe nuint GetFunctionAddress(GameContext context, string type, Predicate<ClrMethod> methodPredicate)
+	public static unsafe nuint GetFunctionAddress(GameContext context, string type, Predicate<CLRMethod> methodPredicate)
 	{
 		return context.GameModuleHelper.GetFunctionAddress(type, methodPredicate);
 	}
@@ -21,17 +22,17 @@ public static class ScriptHelper
 	{
 		return context.HContext.GetCLRHelper(module).GetFunctionAddress(type, func);
 	}
-	public static unsafe nuint GetFunctionAddress(GameContext context, string module, string type, Predicate<ClrMethod> methodPredicate)
+	public static unsafe nuint GetFunctionAddress(GameContext context, string module, string type, Predicate<CLRMethod> methodPredicate)
 	{
 		return context.HContext.GetCLRHelper(module).GetFunctionAddress(type, methodPredicate);
 	}
 	public static unsafe T Read<T>(GameContext context, nuint addr) where T : unmanaged
 	{
-		return context.HContext.DataAccess.Read<T>(addr);
+		return context.HContext.DataAccess.ReadValue<T>(addr);
 	}
 	public static unsafe void Write<T>(GameContext context, nuint addr, T value) where T : unmanaged
 	{
-		context.HContext.DataAccess.Write(addr, value);
+		context.HContext.DataAccess.WriteValue(addr, value);
 	}
 	public static void AobReplaceASM(GameContext Context, string asm, string target)
 	{

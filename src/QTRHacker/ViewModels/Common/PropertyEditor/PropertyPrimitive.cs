@@ -11,10 +11,10 @@ public abstract class PropertyPrimitive<T> : EditableProperty where T : unmanage
 
 	public T Value
 	{
-		get => Entity.Context.DataAccess.Read<T>(Entity.OffsetBase);
+		get => Entity.Context.DataAccess.ReadValue<T>(Entity.OffsetBase);
 		set
 		{
-			Entity.Context.DataAccess.Write(Entity.OffsetBase, value);
+			Entity.Context.DataAccess.WriteValue(Entity.OffsetBase, value);
 			OnPropertyChanged(nameof(Value));
 		}
 	}

@@ -292,7 +292,7 @@ public class StrengthenVampireKnives : BaseFunction
 			"81 F9 21060000").FirstOrDefault();
 		if (a == 0)
 			return;
-		ctx.HContext.DataAccess.Write<int>(a + 18, 100);
+		ctx.HContext.DataAccess.WriteValue<int>(a + 18, 100);
 		IsEnabled = true;
 	}
 	public override void Disable(GameContext ctx)
@@ -302,7 +302,7 @@ public class StrengthenVampireKnives : BaseFunction
 			"81 F9 21060000").FirstOrDefault();
 		if (a == 0)
 			return;
-		ctx.HContext.DataAccess.Write<int>(a + 18, 4);
+		ctx.HContext.DataAccess.WriteValue<int>(a + 18, 4);
 		IsEnabled = false;
 	}
 }

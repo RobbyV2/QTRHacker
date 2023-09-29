@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace QTRHacker;
 
@@ -92,8 +93,11 @@ public static class HackGlobal
 
 	public static void Initialize(int pid)
 	{
-		_GameContext?.Dispose(); //dispose the last one context
-		_GameContext = GameContext.OpenGame(Process.GetProcessById(pid));
+		Application.Current.Dispatcher.Invoke(() =>
+		{
+			_GameContext?.Dispose(); //dispose the last one context
+			_GameContext = GameContext.OpenGame(Process.GetProcessById(pid));
+		});
 		Initialized?.Invoke(null, EventArgs.Empty);
 		GC.Collect();
 	}

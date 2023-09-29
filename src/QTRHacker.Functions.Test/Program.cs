@@ -17,16 +17,23 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace QTRHacker.Functions.Test;
 
-unsafe class Program
+class Program
 {
 	public static unsafe int GetOffset(GameContext context, string module, string type, string field) => (int)context.HContext.GetCLRHelper(module).GetInstanceFieldOffset(type, field) + sizeof(nuint);
 	public static unsafe int GetOffset(GameContext context, string type, string field) => (int)context.GameModuleHelper.GetInstanceFieldOffset(type, field) + sizeof(nuint);
-	unsafe static void Main()
+
+	[STAThread]
+	static void Main(string[] args)
 	{
 		using GameContext ctx = GameContext.OpenGame(Process.GetProcessesByName("Terraria")[0]);
-		Console.WriteLine(ctx.MyPlayer.StatLife);
+		Task.Run(() =>
+		{
+			Console.WriteLine(ctx.MyPlayer.StatLife);
+		}).Wait();
 	}
 }

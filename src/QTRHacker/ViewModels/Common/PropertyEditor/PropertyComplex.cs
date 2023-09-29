@@ -1,4 +1,5 @@
 ﻿using QHackCLR.Common;
+using QHackCLR.Entities;
 using QHackLib;
 using System.Collections.ObjectModel;
 
@@ -26,7 +27,7 @@ public class PropertyComplex : PropertyBase
 		}
 	}
 
-	private void AddItems(ClrType type, bool fullName)
+	private void AddItems(CLRType type, bool fullName)
 	{
 		var entries = type.EnumerateInstanceFields().GroupBy(t => t.Type.IsValueType);
 		var values = entries.Where(t => t.Key).SelectMany(t => t).ToList();
@@ -39,8 +40,8 @@ public class PropertyComplex : PropertyBase
 
 	public virtual void AddItems()
 	{
-		ClrType cur = Entity.Type;
-		List<ClrType> types = new();
+		CLRType cur = Entity.Type;
+		List<CLRType> types = new();
 		while (true)
 		{
 			types.Add(cur);
