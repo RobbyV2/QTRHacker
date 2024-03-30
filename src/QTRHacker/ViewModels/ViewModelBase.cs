@@ -9,7 +9,6 @@ public abstract class ViewModelBase : INotifyPropertyChanged
 
 	protected void OnPropertyChanged(string name)
 	{
-		Application.Current.Dispatcher.Invoke(
-			() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)));
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 	}
 }
