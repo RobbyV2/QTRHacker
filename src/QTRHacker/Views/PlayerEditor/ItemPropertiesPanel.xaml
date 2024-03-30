@@ -15,29 +15,51 @@
         <ItemsControl.Resources>
             <DataTemplate x:Key="DataTemplate_TextBox">
                 <DockPanel MaxHeight="20">
-                    <TextBox Width="60" DockPanel.Dock="Right" Margin="0,0.5,0,0.5" Padding="2,0,2,0"
+                    <TextBox Width="70" DockPanel.Dock="Right" Margin="0,0.5,0,0.5" Padding="3,0,3,0"
                              HorizontalAlignment="Left" VerticalAlignment="Center" 
-                             BorderThickness="0" Background="#787878" Foreground="{StaticResource QTRHacker.Light.Content.Foreground}">
+                             BorderThickness="0" Background="#585858" Foreground="{StaticResource QTRHacker.Light.Content.Foreground}">
                         <TextBox.Text>
                             <Binding Path="Value" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True"/>
                         </TextBox.Text>
+                        <TextBox.Triggers>
+                            <EventTrigger RoutedEvent="GotFocus">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.Color" Duration="0:0:0">
+                                            <DiscreteColorKeyFrame Value="#626262" KeyTime="0:0:0"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="LostFocus">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.Color" Duration="0:0:0">
+                                            <DiscreteColorKeyFrame Value="#585858" KeyTime="0:0:0"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBox.Triggers>
                     </TextBox>
-                    <TextBlock Text="{Binding Tip}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource QTRHacker.Light.Tip.Foreground}">
-                    </TextBlock>
+                    <TextBlock Text="{Binding Tip}" Margin="2,0,2,0"
+                               HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource QTRHacker.Light.Tip.Foreground}"/>
+
                 </DockPanel>
             </DataTemplate>
             <DataTemplate x:Key="DataTemplate_ComboBox">
                 <DockPanel MaxHeight="20">
-                    <ComboBox Width="60" DockPanel.Dock="Right" FontSize="10"
+                    <ComboBox Width="70" DockPanel.Dock="Right" FontSize="10"
                               ItemsSource="{Binding Source}" DisplayMemberPath="Name"
                               SelectedValuePath="Value" SelectedValue="{Binding Value, Mode=TwoWay}">
                     </ComboBox>
-                    <TextBlock Text="{Binding Tip}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource QTRHacker.Light.Tip.Foreground}">
-                    </TextBlock>
+                    <TextBlock Text="{Binding Tip}" Margin="2,0,2,0"
+                               HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource QTRHacker.Light.Tip.Foreground}"/>
+
                 </DockPanel>
             </DataTemplate>
             <DataTemplate x:Key="DataTemplate_CheckBox">
-                <Grid MaxHeight="20">
+                <Grid MaxHeight="70">
                     <CheckBox Content="{Binding Tip}" 
                               VerticalContentAlignment="Center" 
                               Foreground="{StaticResource QTRHacker.Light.Content.Foreground}"

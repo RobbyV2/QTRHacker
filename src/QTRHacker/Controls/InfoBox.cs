@@ -22,6 +22,22 @@ public class InfoBox : ContentControl
 	public static readonly DependencyProperty TipProperty =
 		DependencyProperty.Register(nameof(Tip), typeof(string), typeof(InfoBox));
 
+	public HorizontalAlignment TipHorizontalAlignment
+	{
+		get => (HorizontalAlignment)GetValue(TipHorizontalAlignmentProperty);
+		set => SetValue(TipHorizontalAlignmentProperty, value);
+	}
+	public static readonly DependencyProperty TipHorizontalAlignmentProperty =
+		DependencyProperty.Register(nameof(TipHorizontalAlignment), typeof(HorizontalAlignment), typeof(InfoBox));
+
+	public VerticalAlignment TipVerticalAlignment
+	{
+		get => (VerticalAlignment)GetValue(TipVerticalAlignmentProperty);
+		set => SetValue(TipVerticalAlignmentProperty, value);
+	}
+	public static readonly DependencyProperty TipVerticalAlignmentProperty =
+		DependencyProperty.Register(nameof(TipVerticalAlignment), typeof(VerticalAlignment), typeof(InfoBox));
+
 	public Brush TipBackground
 	{
 		get => (Brush)GetValue(TipBackgroundProperty);

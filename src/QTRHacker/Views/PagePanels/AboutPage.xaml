@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:QTRHacker.Views.PagePanels"
              xmlns:l="clr-namespace:QTRHacker.Localization"
              mc:Ignorable="d"
-             Width="300" Height="340">
+             Width="360" Height="400">
     <Grid>
         <RichTextBox IsReadOnly="True" BorderThickness="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                      Background="#10FFFFFF" Foreground="White" FontSize="14">
-            <FlowDocument PageWidth="300">
+            <FlowDocument PageWidth="360">
                 <Paragraph>
                     <Run Text="{l:Localization UI.AboutContent.Author}"/>
                     <Run Text=": "/>

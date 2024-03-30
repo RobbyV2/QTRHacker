@@ -32,7 +32,7 @@
         <local:ItemPropertiesPanel d:Width="190" x:Name="ItemPropertiesPanel" Grid.Column="1" Margin="5,0,0,0"
                                    DataContext="{Binding ItemPropertiesPanelViewModel}">
         </local:ItemPropertiesPanel>
-        <StackPanel Grid.Column="2" Margin="0,12,3,0">
+        <StackPanel Grid.Column="2" Margin="3,10,6,0">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource QTRHacker.StripButtonStyle}"/>
             </StackPanel.Resources>

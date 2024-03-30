@@ -4,6 +4,7 @@ using QTRHacker.Localization;
 using QTRHacker.ViewModels;
 using System;
 using System.Reflection;
+using System.Windows.Controls;
 
 namespace QTRHacker;
 
